@@ -34,7 +34,8 @@ const vendorLogin = async (req, res) => {
             return res.status(401).json({ error: "Invalid username or password" });
         }
         const token = jwt.sign({ vendorId: vendor._id }, secretKey, { expiresIn: "1h" })
-        res.status(200).json({ success: "Login successfully", token })
+        const vendorId = vendor._id
+        res.status(200).json({ success: "Login successfully", token, vendorId })
         console.log(email);
     }
     catch (error) {
@@ -57,7 +58,9 @@ const getVendorById = async (req, res) => {
         if (!vendor) {
             return res.status(404).json({ error: "Not found" });
         }
-        res.status(200).json({ vendor })
+        const vendorFirmId = vendor.firm[0]._id
+        res.status(200).json({ vendor, vendorFirmId })
+        console.log(vendorFirmId)
     }
     catch (error) {
         console.error(error)
