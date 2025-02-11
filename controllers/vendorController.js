@@ -39,6 +39,8 @@ const vendorLogin = async (req, res) => {
         console.log(email);
     }
     catch (error) {
+         console.log(error);
+        res.status(500).json({ error: "Internal server error" });
     }
 }
 const getAllVendors = async (req, res) => {
